@@ -21,3 +21,7 @@ function getCountryData(countryName) {
 
   return JSON.parse(countryData)
 }
+
+function clearLocalStorage() {
+  localStorage.clear()
+}

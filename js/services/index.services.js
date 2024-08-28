@@ -28,3 +28,7 @@ function getAnsFromApi(name, cb) {
   xhr.open('GET', `https://restcountries.com/v3.1/name/${name}?fullText=true`, true)
   xhr.send()
 }
+
+function clearCache() {
+  clearLocalStorage()
+}
