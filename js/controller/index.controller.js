@@ -5,6 +5,7 @@ function onInit() {
 }
 
 function openShowModal(countryData) {
+  console.log(countryData)
   const nativeNames = Object.values(countryData.name.nativeName)
     .map((n) => `${n.official} (${n.common})`)
     .join(', ')

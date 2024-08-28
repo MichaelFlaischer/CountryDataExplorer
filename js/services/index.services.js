@@ -7,11 +7,21 @@ function searchCountry() {
 }
 
 function getAns(name, cb) {
+  let countryData = getCountryData(name)
+
+  if (countryData) {
+    cb(countryData)
+  } else {
+    countryData = getAnsFromApi(name, cb)
+  }
+}
+
+function getAnsFromApi(name, cb) {
   const xhr = new XMLHttpRequest()
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
       const ans = JSON.parse(xhr.responseText)[0]
-      console.log(ans)
+      saveCountryData(ans)
       cb(ans)
     }
   }
