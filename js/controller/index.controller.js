@@ -79,25 +79,37 @@ function showCountryData(countryData) {
   const cdata = document.querySelector('.country-data')
 
   const flagImage = new Image()
-
-  const cnamge = document.querySelector('.country-name')
-  const cimg = document.querySelector('.country-img')
-  const cpopulation = document.querySelector('.country-population')
-  const carea = document.querySelector('.country-area')
-
   const name = countryData.name.common
   flagImage.src = countryData.flags.png
   const population = countryData.population.toLocaleString()
   const area = countryData.area.toLocaleString() + ' km²'
+  const borders = countryData.borders ? countryData.borders : []
+
+  let bordersLink = ''
+
+  borders.forEach((code) => {
+    const className = `border-link-${code}`
+    bordersLink += `<a href="#" class="${className}">${code}</a> `
+  })
 
   flagImage.onload = () => {
     hideLoader()
 
     cdata.innerHTML = `
-              <h2 class="country-name">${name}</h2>
-          <img class="country-img" src="${flagImage.src}" />
-          <p class="country-population">${population}</p>
-          <p class="country-area">${area}</p>`
+      <h2 class="country-name">${name}</h2>
+      <img class="country-img" src="${flagImage.src}" />
+      <p class="country-population">${population}</p>
+      <p class="country-area">${area}</p>
+      <p class="country-borders">Country Borders: ${bordersLink}</p>`
+
+    borders.forEach((code) => {
+      getCountryLink(code, (link) => {
+        const linkElement = document.querySelector(`.border-link-${code}`)
+        if (linkElement) {
+          linkElement.href = link
+        }
+      })
+    })
   }
 }
 

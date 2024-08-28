@@ -21,6 +21,26 @@ function getCountryData(countryName) {
 
   return JSON.parse(countryData)
 }
+function getCountryDataByCode(countryCode) {
+  if (!countryCode) {
+    return null
+  }
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    const countryData = JSON.parse(localStorage.getItem(key))
+
+    if (
+      countryData.cca2?.toLowerCase() === countryCode.toLowerCase() ||
+      countryData.cca3?.toLowerCase() === countryCode.toLowerCase() ||
+      countryData.ccn3 === countryCode
+    ) {
+      return countryData
+    }
+  }
+
+  return null
+}
 
 function clearLocalStorage() {
   localStorage.clear()

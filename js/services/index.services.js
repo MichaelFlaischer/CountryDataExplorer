@@ -34,3 +34,36 @@ function getAnsFromApi(name, cb) {
 function clearCache() {
   clearLocalStorage()
 }
+
+function getCountryByCode(code, cb) {
+  let countryData = getCountryDataByCode(code)
+
+  if (countryData) {
+    cb(countryData)
+  } else {
+    countryData = getCountryLinkFromApi(code)
+    cb(countryData)
+  }
+}
+
+function getCountryLink(code, cb) {
+  let countryData = getCountryDataByCode(code)
+  if (countryData) {
+    cb(countryData.maps.googleMaps)
+  } else {
+    getCountryLinkFromApi(code, cb)
+  }
+}
+
+function getCountryLinkFromApi(code, cb) {
+  const xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      const ans = JSON.parse(xhr.responseText)[0]
+      saveCountryData(ans)
+      cb(ans.maps.googleMaps)
+    }
+  }
+  xhr.open('GET', `https://restcountries.com/v3.1/alpha/${code}`, true)
+  xhr.send()
+}
