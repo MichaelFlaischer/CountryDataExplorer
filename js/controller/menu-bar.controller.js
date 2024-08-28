@@ -13,5 +13,4 @@ function menuRender() {
           </ul>
         </div>
       `
-  // onInitPage() // Initialize translations and styles
 }

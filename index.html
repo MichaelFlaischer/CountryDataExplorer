@@ -7,16 +7,14 @@
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body onload="onInit()">
-    <!-- <script src="js/global/i18n.js"></script> -->
     <script src="js/services/index.services.js"></script>
     <script src="js/controller/index.controller.js"></script>
     <script src="js/controller/menu-bar.controller.js"></script>
     <header>
       <h1>Country Data Explorer</h1>
-      <!-- <select onchange="changeLanguage(this.value)" class="language-toggle"></select> -->
     </header>
     <nav></nav>
-    <main>
+    <main class="flexbox-column">
       <div class="main-container">
         <h2>Version Control Practice with Git</h2>
         <p>
@@ -24,6 +22,12 @@
           project itself focuses on building a simple application that retrieves and displays country information using the REST Countries API. As I work on
           this project, I utilize technologies like HTML, CSS, JavaScript, and jQuery, while also learning how to manage my codebase effectively using Git.
         </p>
+      </div>
+      <div class="country-search border">
+        <label for="cname">Country name:</label>
+        <input type="text" id="cname" name="country-name" />
+        <button onclick="searchCountry()">searchCountry</button>
+        <pre class="search-country flexbox-row"></pre>
       </div>
     </main>
     <footer>
