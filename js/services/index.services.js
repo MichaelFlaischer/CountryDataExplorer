@@ -1,6 +1,8 @@
 'use strict'
 
-function searchCountry() {
+function searchCountry(event) {
+  event.preventDefault()
+
   let elCountry = document.querySelector('#cname').value
 
   getAns(elCountry, showCountryData)
