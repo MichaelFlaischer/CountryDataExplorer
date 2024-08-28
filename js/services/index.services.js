@@ -17,6 +17,8 @@ function getAns(name, cb) {
 }
 
 function getAnsFromApi(name, cb) {
+  showLoader()
+
   const xhr = new XMLHttpRequest()
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

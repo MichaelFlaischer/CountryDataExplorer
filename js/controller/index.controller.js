@@ -76,8 +76,6 @@ function closeDialog() {
 }
 
 function showCountryData(countryData) {
-  showLoader()
-
   const cdata = document.querySelector('.country-data')
 
   const flagImage = new Image()
