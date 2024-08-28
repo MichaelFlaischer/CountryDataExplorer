@@ -76,18 +76,44 @@ function closeDialog() {
 }
 
 function showCountryData(countryData) {
+  showLoader()
+
+  const cdata = document.querySelector('.country-data')
+
+  const flagImage = new Image()
+
   const cnamge = document.querySelector('.country-name')
   const cimg = document.querySelector('.country-img')
   const cpopulation = document.querySelector('.country-population')
   const carea = document.querySelector('.country-area')
 
   const name = countryData.name.common
-  const flagImage = countryData.flags.png
+  flagImage.src = countryData.flags.png
   const population = countryData.population.toLocaleString()
   const area = countryData.area.toLocaleString() + ' km²'
 
-  cnamge.textContent = name
-  cimg.src = flagImage
-  cpopulation.textContent = population
-  carea.textContent = area
+  flagImage.onload = () => {
+    hideLoader()
+
+    cdata.innerHTML = `
+              <h2 class="country-name">${name}</h2>
+          <img class="country-img" src="${flagImage.src}" />
+          <p class="country-population">${population}</p>
+          <p class="country-area">${area}</p>`
+  }
+}
+
+function showLoader() {
+  const cdata = document.querySelector('.country-data')
+  cdata.innerHTML = `
+        <div class="loader-container">
+          <img src="img/loader.svg" alt="Loading..." class="loader-img"/>
+        </div>`
+}
+
+function hideLoader() {
+  const loaderContainer = document.querySelector('.loader-container')
+  if (loaderContainer) {
+    loaderContainer.remove()
+  }
 }
